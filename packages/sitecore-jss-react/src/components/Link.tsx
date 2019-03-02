@@ -73,13 +73,27 @@ export const Link: React.SFC<LinkProps> = ({ field, editable, children, showLink
   if (!link) {
     return null;
   }
-
-  const anchorAttrs: any = {
-    href: link.href,
-    className: link.class,
-    title: link.title,
-    target: link.target,
-  };
+var anchorAttrs:any={};
+if(link.trackingType && link.trackingType!='' && link.trackingId && link.trackingId!='') 
+	{
+      anchorAttrs = {
+      href: link.href,
+      className: link.class,
+      title: link.title,
+      target: link.target,
+      trackingType: link.trackingType,
+      trackingId: link.trackingId,
+      onClick: () => {alert('Hello!!!') }
+    };
+  }
+  else{
+      anchorAttrs = {
+      href: link.href,
+      className: link.class,
+      title: link.title,
+      target: link.target,
+    };
+  }
 
   if (anchorAttrs.target === '_blank' && !anchorAttrs.rel) {
     // information disclosure attack prevention keeps target blank site from getting ref to window.opener
